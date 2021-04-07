@@ -1,0 +1,4 @@
+<div th:class="'component hidden field_' + ${field.fieldName}" xmlns:th="http://www.thymeleaf.org">
+
+    <input type="hidden" th:value="${field.defaultValue}" th:field="*{__${field.fieldName}__}">
+</div>

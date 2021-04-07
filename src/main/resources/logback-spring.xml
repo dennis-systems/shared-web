@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <property resource="application.properties" />
+    <property name="LOGS" value="${LOG_PATH}" />
+    <property name="log-individual-name" value="xray-parser" />
+
+    <appender name="Console"
+              class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+                %black(%d{HH:mm:ss}) %highlight(%-5level) %yellow(%C{1.}): %msg%n%throwable
+            </Pattern>
+        </layout>
+    </appender>
+
+    <appender name="RollingFile"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/${log-individual-name}-common.log</file>
+        <encoder
+                class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%date{"HH:mm:ss"} %p %C{1.} [%t] %m%n</Pattern>
+        </encoder>
+
+        <rollingPolicy
+                class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- rollover daily and when the file reaches 10 MegaBytes -->
+            <fileNamePattern>${LOG_PATH}/archived/${log-individual-name}-common-%d{yyyy-MM-dd}.%i.log
+            </fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>10MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+    </appender>
+    <appender name="RollingErrorFile"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/${log-individual-name}-error.log</file>
+        <encoder
+                class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%date{"HH:mm:ss"} %p %L %M  %C{1.} [%t] %m%n</Pattern>
+        </encoder>
+
+        <rollingPolicy
+                class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- rollover daily and when the file reaches 10 MegaBytes -->
+            <fileNamePattern>${LOG_PATH}/archived/${log-individual-name}-error-%d{yyyy-MM-dd}.%i.log
+            </fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>10MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+    </appender>
+
+    <!-- LOG everything at INFO level -->
+    <root level="info">
+        <appender-ref ref="RollingFile" />
+        <appender-ref ref="Console" />
+    </root>
+
+    <!-- LOG "com.baeldung*" at TRACE level -->
+    <root level="trace" >
+        <appender-ref ref="RollingFile" />
+
+    </root>
+    <root level="error" >
+        <appender-ref ref="RollingErrorFile" />
+        <appender-ref ref="Console" />
+    </root>
+    <logger name="de.allianz.bdp.herold.*"  level="error" >
+        <appender-ref ref="RollingErrorFile" />
+
+    </logger>
+    <logger name="de.allianz.bdp.herold.*"  level="warn" >
+        <appender-ref ref="RollingFile" />
+
+    </logger>
+    <logger name="de.allianz.bdp.herold.*" level="debug" >
+        <appender-ref ref="RollingFile" />
+
+    </logger>
+
+</configuration>

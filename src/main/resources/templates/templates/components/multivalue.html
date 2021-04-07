@@ -1,0 +1,43 @@
+<script xmlns:th="http://www.thymeleaf.org" th:inline="javascript" th:src="@{/static/js/multi.js}"></script>
+<link xmlns:th="http://www.thymeleaf.org" rel="stylesheet" th:href="@{/css/multi.css}">
+
+
+<div class="multivalue-container" xmlns:th="http://www.thymeleaf.org">
+    <div id="input-container">
+        <label th:text="${label}"></label>
+
+        <table style="width: 100%;">
+            <tr>
+                <td colspan="2">
+                    <div id="multi_values"></div>
+                </td>
+            </tr>
+            <tr>
+                <td><input type="text" id="addElementValue"></td>
+                <td><img id="multi-add-btn" onclick="addMultiValue('multi_values', 'addElementValue', '#testplans');"
+                         th:alt="#{xray.components.multi.add.alt}" th:src="@{/images/add.png}"></td>
+            </tr>
+
+        </table>
+    </div>
+</div>
+
+<div id="multiTemplate" xmlns:th="http://www.thymeleaf.org">
+    <span class="multiValue">
+        <span class="multi_value">TXT </span>
+        <img th:src="@{/images/rm.png}" onclick="removeItem(this)" class="multi-add-btn"
+             th:alt="#{xray.components.multi.remove.alt}"/>
+    </span>
+</div>
+
+<script xmlns:th="http://www.thymeleaf.org" th:inline="javascript">
+
+    /*<![CDATA[*/
+
+
+    $(document).ready(function () {
+        setMultiValues(/*[[${values}]]*/ '', 'multi_values');
+    });
+
+    /*]]>*/
+</script>

@@ -1,0 +1,83 @@
+
+<div class="row" xmlns:th="http://www.thymeleaf.org" >
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+
+        <div th:include="/templates/components/form/searchable/search" ></div>
+
+        <table th:fragment="notification-list" th:if="${!isEmpty}" th:id="${dataDescription.component_id}" class="table table-striped table-bordered" style="width:100%">
+            <caption th:text="${dataDescription.title}"></caption>
+            <thead>
+
+
+            <tr>
+                <th th:each="header: ${headers} " width="20px" th:if="${header.isVisible()}" >
+                    <span th:text="${header.translation}"></span>
+                    <span th:if="${header.sortable}">
+                            <a th:href="${@ui.start().append('orderBy', header.header).invert('asc', 'false').get()}">
+                                <img th:if="${@ui.getFromRequest('asc') == 'true'  && @ui.getFromRequest('orderBy') == header.header}" src="/images/sort-asc.png">
+                            </a>
+
+                        <a th:href="${@ui.start().append('orderBy', header.header).invert('asc', 'false').get()}">
+                                <img th:if="${@ui.getFromRequest('asc') == 'false' && @ui.getFromRequest('orderBy') == header.header }" src="/images/sort-desc.png">
+                            </a>
+
+                          <a th:href="${@ui.start().append('orderBy', header.header).invert('asc', 'false').get()}">
+                                <img th:if="${@ui.getFromRequest('orderBy') != header.header}" src="/images/sort-none.png">
+                          </a>
+
+                    </span>
+                </th>
+            </tr>
+
+            <tr th:each="row : ${dataMap}">
+
+                <td th:each="header : ${headers}"  th:if="${header.isVisible()}">
+                    <span th:if="${header.showContent}">
+                    <span th:if="${header.format == ''}" th:class="${header.header} + '_value'"
+                            th:text="${row.get(header.header)}"> </span>
+
+                    <span th:if="${header.format != ''}" th:class="${header.header} + '_value'"
+                          th:text="${@ui.formatDate(row.get(header.header), 'dd.MM.yyyy HH:mm:ss')}"> </span>
+                    </span>
+                    <div class="actions_wrapper">
+                        <div th:if="${header.actions != null}" th:each=" action : ${header.actions}" >
+                            <div th:with="action=${action}, dataRow=${row}" th:include="'/templates/components/custom/' + ${action.component()}"></div>
+                        </div>
+                    </div>
+                </td>
+
+            </tr>
+            </thead>
+        </table>
+    </div>
+    <div class="col-md-2"></div>
+    <div class="row" th:if="${!isEmpty}" th:fragment="pagination" >
+        <div  class="col-md-2"></div>
+        <div class="col-md-8">
+
+            <label th:text="#{global.app.list.per_page}" ></label>
+            <a th:href="${@ui.start().append('size', '5').get()}">5</a>
+            <a th:href="${@ui.start().append('size', 10).get()}">10</a>
+            <a th:href="${@ui.start().append('size', 15).get()}">15</a>
+            <a th:href="${@ui.start().append('size', 25).get()}">25</a>
+            <a th:href="${@ui.start().append('size', 50).get()}">50</a>
+
+            <nav aria-label="Pagination" class="stroke">
+                <div class="pagination justify-content-center">
+                    <a class="prev page-numbers" th:if="${pageNumbers.size() > 1}" th:href="${@ui.start().append('page', '1').get()}">first</a>
+
+                    <a th:each="pageNumber : ${pageNumbers}" th:href="${@ui.start().append('page', pageNumber).get() +''}">
+                    <span aria-current="page" class="page-numbers current" th:text="${pageNumber}"
+                          th:if="${pageNumber == currentPage}"></span>
+                        <span aria-current="page" class="page-numbers" th:text="${pageNumber}"
+                              th:if="${pageNumber != currentPage}"></span></a>
+                    <a class="next page-numbers" th:if="${pageNumbers.size() > 1}"
+                       th:href="${@ui.start().append('page', pageNumbers.size()-1 + '').get()}">last</a>
+
+                </div>
+            </nav>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</div>

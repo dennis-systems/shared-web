@@ -1,0 +1,56 @@
+<div th:class="'component file field_' + ${field.fieldName}" xmlns:th="http://www.thymeleaf.org">
+
+    <input type="file" class="file_uploader">
+    <input type="hidden" class="file_uploader_value" th:field="*{__${field.fieldName}__}"
+           th:value="*{__${field.fieldName}__}">
+    <input type="button" th:value="#{global.file.uploader.upload}" onclick="uploadFile()">
+    <div id="file_uploader_status"></div>
+    <div class="img_preview">
+        <img src="/images/nofile.png" class="file_uploader_img">
+    </div>
+</div>
+
+<script th:inline="javascript" xmlns:th="http://www.thymeleaf.org">
+    /*<![CDATA[*/
+    var path = /*[[${@ui.getSystemParam('files.uploader.url')}]]*/'';
+    var param_name = /*[[${@ui.getSystemParam('files.uploader.param_name')}]]*/'';
+    var getPath = /*[[${@ui.getSystemParam('files.uploader.getPath')}]]*/'';
+    if ($(".file_uploader_value").val() == null || $(".file_uploader_value").val() == '') {
+        currentImage = "/images/nofile.png";
+    } else {
+        currentImage = getPath + $(".file_uploader_value").val();
+    }
+    //var currentImage = $(".file_uploader_value").val() == null || $(".file_uploader_value").val() == '' ? "/images/nofile.png" : getPath +  $(".file_uploader_value").val()
+    $(".file_uploader_img").attr("src", currentImage);
+
+    function uploadFile() {
+        var file_data = $(".file_uploader").prop("files")[0];
+        var form_data = new FormData();
+        form_data.append(param_name, file_data);
+        $("#file_uploader_status").html("<img src= '/images/loading.gif' >")
+        $.ajax({
+            url: path,
+            dataType: 'json',
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: form_data,
+            type: 'post',
+            success: function (data) {
+                $(".file_uploader_value").val(data.id)
+                $("#file_uploader_status").html("Uploaded")
+                getFile(data.id, getPath)
+            },
+            error: function (jqXHR, error, errorThrown) {
+                $("#file_uploader_status").html("Could not upload file! " + errorThrown + " " + error)
+            }
+        });
+
+    }
+
+    function getFile(id, path) {
+
+        $(".file_uploader_img").attr("src", path + id);
+
+    }
+</script>

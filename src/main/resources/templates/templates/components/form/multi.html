@@ -1,0 +1,96 @@
+<style>
+    .inputData {
+        width: 150px;
+        float:left;
+        background: none;
+        padding: 5px;
+        margin-left:  5px;
+    }
+
+    .inputData img, .inputData span{
+        float:right;
+        display: inline;
+    }
+
+    .inputData input {
+        width: 90px;
+        display: inline;
+    }
+    .required, label {
+        float: left;
+    }
+
+     #multi-add-btn{
+        float: left
+    }
+    .values {
+        float: left;
+    }
+
+    .multi_value {
+        float:left;
+        background: none;
+        border: 1px solid gray;display: inline;
+        float: left;
+
+
+    }
+
+    .multi-remove-btn{
+        float: left;
+        width: 16px;
+        height: 16px;
+        background: url("/images/rm.png") no-repeat;
+    }
+    .multi_value_text {
+        float:left;
+        background: none;
+        font-size: 14px;
+        background: rgba(0, 0, 0, 0.1);
+        border: 0;
+        border-radius: 4px;
+        box-sizing: border-box;
+        padding: 12px 20px;
+        color: rgba(0, 0, 0, 0.6);
+        font-family: inherit;
+        font-weight: 500;
+        line-height: inherit;
+        -webkit-transition: 0.3s ease;
+        transition: 0.3s ease;
+        margin-top:5px;
+        margin-left:5px;
+        margin-right:5px;
+    }
+
+</style>
+<div th:class="'component form-group field_' + ${field.fieldName}" xmlns:th="http://www.thymeleaf.org">
+    <div style="width: 95%"><label th:if="${field.showLabel}" th:text="${field.fieldTranslation}"></label><span class="required"
+                                                                                        th:if="${field.required}">*</span>
+    </div>
+    <!--    <img style="position:relative; top: 20px; left: 7px; z-index: 999"  src="/images/wn.png" width="16px" height="16px" th:if="${validationContext != null && validationContext.hasErrors(field.fieldName)}" >-->
+
+    <input th:class="${field.fieldName} + ' __multi_value'" th:field="*{__${field.fieldName}__}"
+           class="__multi_value" type="hidden">
+    <div class="multi_value">
+        <span th:class="'values values_'  + ${field.fieldName}"></span>
+
+        <div class="inputData">
+        <input type="text" id="valueInput" placeholder="" th:class="${'tag_value_input tag_value_input_' + field.fieldName} ">
+            <span><img id="multi-add-btn" th:data="${field.fieldName}" onclick="addItem(this)"
+                   th:alt="#{xray.components.multi.add.alt}" th:src="@{/images/add.png}"></span>
+        </div>
+        <div style="clear: both"></div>
+    </div>
+</div>
+<script xmlns:th="http://www.thymeleaf.org" th:inline="javascript">
+
+    /*<![CDATA[*/
+    var fieldId = /*[[${field.fieldName}]]*/'test';
+    /*]]>*/
+
+        console.log( "ready! " + fieldId );
+        syncAvers(fieldId);
+
+
+
+</script>

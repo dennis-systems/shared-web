@@ -1,0 +1,23 @@
+<div th:class="'component form-group field_' + ${field.fieldName}" xmlns:th="http://www.thymeleaf.org">
+        <label th:if="${field.showLabel}" th:text="${field.fieldTranslation}"></label><span class="required" th:if="${field.required}" >*</span>
+
+        <input th:if="${validationContext == null || not validationContext.hasErrors(field.fieldName)}" type="text" th:autocomplete="${field.autocomplete}" th:value="${field.defaultValue}" th:field="*{__${field.fieldName}__}">
+
+        <input th:if="${validationContext != null && validationContext.hasErrors(field.fieldName)}" class="error" th:autocomplete="${field.autocomplete}" th:value="${field.defaultValue}" th:field="*{__${field.fieldName}__}">
+    </div>
+
+    <script xmlns:th="http://www.thymeleaf.org" th:inline="javascript">
+
+        /*<![CDATA[*/
+        fieldId = /*[[${field.fieldName}]]*/'test';
+        $('#' + fieldId).datepicker({
+            format: 'dd.mm.yyyy',
+            autoclose: true,
+            assumeNearbyYear: true,
+            clearBtn: true,
+            todayHighlight: true,
+
+
+        });
+        /*]]>*/
+    </script>

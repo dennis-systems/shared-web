@@ -1,0 +1,31 @@
+<div th:if="${validationContext != null}"  xmlns:th="http://www.thymeleaf.org">
+    <div th:include="/templates/components/toast-plain"
+         th:each="message : ${validationContext.getValidationMessages()}">
+    </div>
+</div>
+
+<div th:if="${form.showTitle}"  xmlns:th="http://www.thymeleaf.org">
+    <div th:if="${!isEdit}" class="form-header">
+        <h1 th:text="${form.title}"></h1>
+    </div>
+    <div th:if="${isEdit}" class="form-header">
+        <h1 th:text="${form.editTitle}"></h1>
+    </div>
+</div>
+<div class="form-content"  xmlns:th="http://www.thymeleaf.org">
+
+
+    <form th:method="${form.method}" th:object="${objectItem}"
+          th:action="${form.path}">
+        <div th:each="field : ${formFields}" >
+            <div th:include="${'/templates/components/form/' + field.type + '.html'}">
+
+            </div>
+
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn" th:text="${form.commitButtonText}"></button>
+        </div>
+    </form>
+
+</div>

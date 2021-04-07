@@ -1,0 +1,50 @@
+--- # Indented Block
+scripts:
+
+  - name: default.create database
+    always_to_run: false
+    fail_on_execute: false
+    if-not-sql: SELECT FROM pg_database WHERE datname = '${spring.datasource.database}'
+    root: true
+    isolated: true
+    sql: create database ${spring.datasource.database}
+
+
+  - name: add db to injections v1
+    always_to_run: false
+    sql: alter table db_injection add column if not exists db varchar(50);
+    fail_on_execute: false
+
+
+  - name: default.create_db_updater-1
+    always_to_run: false
+    script:  db/root-sql-init/init-1.sql
+    if-not-sql: SELECT 1  FROM pg_tables WHERE schemaname = 'public' AND tablename = 'db_injection'
+    fail_on_execute: false
+
+  - name: default.create_db_updater_sql_if_create_columnt
+    always_to_run: false
+    sql: alter table db_injection add column if not exists if_sql text;
+    fail_on_execute: false
+
+  - name: default.create_db_updater_profile_create_columnt
+    always_to_run: false
+    sql: alter table db_injection add column if not exists profile varchar(50);
+    fail_on_execute: false
+
+  - name: default.profile-to-default
+    always_to_run: true
+    sql: update db_injection set profile='' where profile is null
+    fail_on_execute: false
+
+
+  - name: default.create_table_runs
+    always_to_run: false
+    script: db/root-sql-init/application-runs.sql
+    fail_on_execute: false
+
+
+
+
+
+

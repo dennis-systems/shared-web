@@ -1,0 +1,17 @@
+
+<script th:src="@{/js/bootstrap-datepicker.min.js}" xmlns:th="http://www.thymeleaf.org"></script>
+<div th:if="${dataDescription.isSearchable}" th:class="${'component search'}" xmlns:th="http://www.thymeleaf.org">
+
+    <form th:action="${@ui.start().get()}" method="get">
+        <input th:name="search" value="true" type="hidden">
+        <div th:each="header : ${headers }">
+            <div class="search_component" th:name="${header.header + '_search'}" th:if="${header.searchable}">
+                <div th:include="${'templates/components/form/searchable/' + header.searchType }"> </div>
+            </div>
+        </div>
+        <div style="clear: both"></div>
+        <div class="form-group-small">
+            <button type="button" onclick="submit();" th:text="#{global.translations.submit_search}"> </button>
+        </div>
+    </form>
+</div>

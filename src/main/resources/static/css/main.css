@@ -1,0 +1,223 @@
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 160px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    font-size: 14px;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+}
+.ui-progressbar .ui-progressbar-value {
+    height: 2px;
+    line-height: 2px;
+    background-color: rgb(43, 194, 83);
+    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, rgb(43, 194, 83)), color-stop(1, rgb(84, 240, 84)));
+    background-image: -moz-linear-gradient(center bottom, rgb(43, 194, 83) 37%, rgb(84, 240, 84) 69%);
+}
+.ui-widget.ui-widget-content{
+    border: 0px;
+}
+.table {
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    table-layout: fixed;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.table caption {
+    font-size: 1.5em;
+    margin: .5em 0 .75em;
+}
+
+.bg-logo{
+    background: url("/images/al.png") no-repeat;
+    background-position: top center;
+}
+
+.table tr {
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    padding: .35em;
+}
+
+.table th,
+.table td {
+    padding: .625em;
+    text-align: left;
+    vertical-align: top;
+}
+
+.table th {
+    font-size: .85em;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+
+@media screen and (max-width: 600px) {
+    .table {
+        border: 0;
+    }
+
+    .table caption {
+        font-size: 1.3em;
+    }
+
+    .table thead {
+        border: none;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+    }
+
+    .table tr {
+        border-bottom: 3px solid #ddd;
+        display: block;
+        margin-bottom: .625em;
+    }
+
+    .table td {
+        border-bottom: 1px solid #ddd;
+        display: block;
+        font-size: .8em;
+        text-align: right;
+    }
+
+    .table td::before {
+        /*
+        * aria-label has no advantage, it won't be read inside a table
+        content: attr(aria-label);
+        */
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    .table td:last-child {
+        border-bottom: 0;
+    }
+}
+
+.section {
+    height: 70px;
+}
+
+/* NAVIGATION */
+nav {
+    width: 80%;
+    background: #fff;
+    padding: 15px 0;
+}
+
+nav ul {
+    list-style: none;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline-block;
+}
+
+nav ul li a {
+    display: block;
+    padding: 15px;
+    text-decoration: none;
+    color: #aaa;
+    text-transform: uppercase;
+    margin: 0 10px;
+}
+
+nav ul li a,
+nav ul li a:after,
+nav ul li a:before {
+    transition: all .5s;
+}
+
+nav ul li a:hover {
+    color: #555;
+    text-decoration: none!important;
+}
+
+nav.stroke ul li a,
+nav.fill ul li a {
+    position: relative;
+}
+
+nav.stroke ul li a:after,
+nav.fill ul li a:after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 0%;
+    content: '.';
+    color: transparent;
+    background: #333;
+    height: 1px;
+}
+
+nav.stroke ul li a:hover:after {
+    text-decoration: none!important;
+    width: 100%;
+}
+
+nav.fill ul li a {
+    transition: all 2s;
+}
+
+/* By Dominik Biedebach @domobch */
+
+.pagination a  {
+    text-decoration: none;
+    color: #333;
+    padding: 2px;
+
+}
+
+.pagination a span{
+    width: 40px;
+    height: 30px;
+    display: inline-block;
+    text-align: center;
+    padding-top: 10px;
+}
+
+.pagination a .current {
+    text-decoration: none;
+    color: white;
+    background: #4285F4;
+    border-radius: 5%;
+
+}
+
+
+.warn {
+    color :red;
+    width: 16px;
+    height: 17px;
+    background: url("/images/wn.png");
+    padding-left: 20px;
+    background-repeat: no-repeat;
+    text-decoration: underline red;
+}

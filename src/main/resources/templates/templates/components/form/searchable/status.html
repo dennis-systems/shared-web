@@ -1,0 +1,16 @@
+<div th:class="'component form-group field_' + ${header.header}" xmlns:th="http://www.thymeleaf.org">
+    <label th:text="${header.translation}" style="width: 100%"></label>
+    <select th:name="${header.header + '_so_'}">
+        <option value="_nu" th:selected="${@ui.getParamIs(header.header + '_so_', '_nu')}" th:text="#{xray.global.list.search.type.not_used}">-- Not Used --</option>
+        <option value="equals" th:selected="${@ui.getParamIs(header.header + '_so_', 'equals')}" th:text="#{xray.global.list.search.type.equals}">Equals</option>
+        <option value="notEquals" th:selected="${@ui.getParamIs(header.header + '_so_', 'notEquals')}" th:text="#{xray.global.list.search.type.not_equals}">Not Equals</option>
+    </select>
+    <select th:id="${header.header + '_search'}" th:name="${header.header + '_search'}" type="text">
+        <option value="0" th:text="#{xray.pages.job.list.status_0}"  th:selected="${@ui.getParamIs(header.header + '_search', '0')}"></option>
+        <option value="1" th:text="#{xray.pages.job.list.status_1}" th:selected="${@ui.getParamIs(header.header + '_search', '1')}"></option>
+        <option value="2" th:text="#{xray.pages.job.list.status_2}" th:selected="${@ui.getParamIs(header.header + '_search', '2')}"></option>
+        <option value="4" th:text="#{xray.pages.job.list.status_4}" th:selected="${@ui.getParamIs(header.header + '_search', '3')}"></option>
+        <option value="6" th:text="#{xray.pages.job.list.status_6}" th:selected="${@ui.getParamIs(header.header + '_search', '4')}"></option>
+
+    </select>
+</div>

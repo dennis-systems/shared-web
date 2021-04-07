@@ -1,0 +1,14 @@
+<div th:class="'component form-group field_' + ${header.header}" xmlns:th="http://www.thymeleaf.org">
+    <label th:text="${header.translation}" style="width: 100%"></label>
+    <select th:name="${header.header + '_so_'}" >
+        <option value="_nu" th:selected="${@ui.getParamIs(header.header + '_so_', '_nu')}" th:text="#{xray.global.list.search.type.not_used}">-- Not Used --</option>
+        <option value="equals" th:selected="${@ui.getParamIs(header.header + '_so_', 'equals')}" th:text="#{xray.global.list.search.type.equals}">Equals</option>
+        <option value="startsWith" th:selected="${@ui.getParamIs(header.header + '_so_', 'startsWith')}" th:text="#{xray.global.list.search.type.starts_with}">Starts with</option>
+        <option value="endsWith" th:selected="${@ui.getParamIs(header.header + '_so_', 'endsWith')}" th:text="#{xray.global.list.search.type.ends_with}">Ends with</option>
+        <option value="contains" th:selected="${@ui.getParamIs(header.header + '_so_', 'contains')}" th:text="#{xray.global.list.search.type.contains}">Contains</option>
+        <option value="notEquals" th:selected="${@ui.getParamIs(header.header + '_so_', 'notEquals')}" th:text="#{xray.global.list.search.type.not_equals}">Not equals</option>
+        <option value="notNull" th:selected="${@ui.getParamIs(header.header + '_so_', 'notNull')}" th:text="#{xray.global.list.search.type.not_null}">Not null</option>
+        <option value="null" th:selected="${@ui.getParamIs(header.header + '_so_', 'null')}" th:text="#{xray.global.list.search.type.null}">Null</option>
+    </select>
+    <input th:name="${header.header + '_search'}" th:value="${@ui.getFromRequest(header.header + '_search')}" type="text">
+</div>

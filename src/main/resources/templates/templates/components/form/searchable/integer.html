@@ -1,0 +1,15 @@
+<div th:class="'component form-group field_' + ${header.header}" xmlns:th="http://www.thymeleaf.org">
+    <label th:text="${header.translation}" style="width: 100%"></label>
+    <select th:name="${header.header + '_so_'}">
+        <option value="_nu" th:selected="${@ui.getParamIs(header.header + '_so_', '_nu')}" th:text="#{xray.global.list.search.type.not_used}">-- Not Used --</option>
+        <option value="equals" th:selected="${@ui.getParamIs(header.header + '_so_', 'equals')}" th:text="#{xray.global.list.search.type.equals}">Equals</option>
+        <option value="lt"  th:selected="${@ui.getParamIs(header.header + '_so_', 'lt')}" th:text="#{xray.global.list.search.type.less_then}">Less</option>
+        <option value="gt" th:selected="${@ui.getParamIs(header.header + '_so_', 'gt')}" th:text="#{xray.global.list.search.type.greater_then}">Greater</option>
+        <option value="le"  th:selected="${@ui.getParamIs(header.header + '_so_', 'le')}" th:text="#{xray.global.list.search.type.less_or_equals}">Less or equals</option>
+        <option value="ge" th:selected="${@ui.getParamIs(header.header + '_so_', 'ge')}" th:text="#{xray.global.list.search.type.greater_or_equals}">Greater or Equal</option>
+        <option value="notEquals" th:selected="${@ui.getParamIs(header.header + '_so_', 'notEquals')}" th:text="#{xray.global.list.search.type.not_equals}">Not equals</option>
+        <option value="notNull" th:selected="${@ui.getParamIs(header.header + '_so_', 'notNull')}" th:text="#{xray.global.list.search.type.not_null}">Not null</option>
+        <option value="null" th:selected="${@ui.getParamIs(header.header + '_so_', 'null')}" th:text="#{xray.global.list.search.type.null}">Null</option>
+    </select>
+    <input th:id="${header.header + '_search'}" th:name="${header.header + '_search'}"  th:value="${@ui.getFromRequest(header.header + '_search')}"  type="text">
+</div>

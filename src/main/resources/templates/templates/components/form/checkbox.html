@@ -1,0 +1,7 @@
+<div th:class="'component form-group field_' + ${field.fieldName}" xmlns:th="http://www.thymeleaf.org">
+    <label th:if="${field.showLabel}"  th:text="${field.fieldTranslation}"></label><span class="required" th:if="${field.required}" >*</span>
+
+    <input th:if="${validationContext == null || not validationContext.hasErrors(field.fieldName)}" class="checkbox_with_message" type="checkbox" th:field="*{__${field.fieldName}__} ">
+    <input th:if="${validationContext != null && validationContext.hasErrors(field.fieldName)}" class="error checkbox_with_message" type="checkbox" th:field="*{__${field.fieldName}__} ">
+
+</div>

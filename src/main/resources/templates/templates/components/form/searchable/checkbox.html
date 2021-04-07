@@ -1,0 +1,11 @@
+
+
+<div th:class="'component form-group field_' + ${header.header}" xmlns:th="http://www.thymeleaf.org">
+    <label th:text="${header.translation}" style="width: 100%"></label>
+    <select th:name="${header.header + '_so_'}" >
+        <option value="_nu" th:selected="${@ui.getParamIs(header.header + '_so_', '_nu')}" th:text="#{xray.global.list.search.type.not_used}">-- Not Used --</option>
+        <option value="_nu" th:selected="${@ui.getParamIs(header.header + '_so_', 'true')}" th:text="#{xray.global.list.search.type.false}">true</option>
+        <option value="equals" th:selected="${@ui.getParamIs(header.header + '_so_', 'false')}" th:text="#{xray.global.list.search.type.true}">false</option>
+    </select>
+    <input th:name="${header.header + '_search'}" th:value="${@ui.getFromRequest(header.header + '_search')}" type="text">
+</div>
